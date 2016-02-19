@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+
+        <!--Email template of Confirmation Event Ticket-->
+        <record id="email_template_confirm_event_ticket" model="email.template">
+            <field name="name">Confirmation of Event Ticket</field>
+            <field name="email_from">${(user.login or '')}</field>
+            <field name="subject">Event Ticket</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="crea8s_event.model_event_event"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+			<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+			    <center>Confirmation of Event</center><br/><br/>
+            	<center>$(Event Name)</center><br/><br/>
+            	Dear S($Name)<br/><br/>
+			    This mail serves as your check-in ticket for the above-mentioned event.<br/><br/>
+			    Location: $(Event Location)
+			    <br/><br/>
+				Date/Time: $(Event Date/Time)
+			    
+			    <center>Thank You</center><br/><br/>
+			    <br/>
+			    * You may print a copy of this email with attached QR code for faster registration.
+			    </div>
+			]]></field>
+        </record>
+
+
+    </data>
+</openerp>

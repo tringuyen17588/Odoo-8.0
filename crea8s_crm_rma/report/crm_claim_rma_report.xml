@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>      
+                
+		<report auto="False" id="crm_claim_rma_report_id" model="crm.claim" name="crm_claim_rma_report_reportname"
+                rml="crm_claim_rma/report/crm_claim_rma_report.rml" string="RMA Report 01"
+                usage="default"/>
+    </data>
+</openerp>

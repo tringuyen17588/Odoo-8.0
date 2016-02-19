@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <record id="crea8s_view_payment_term_form" model="ir.ui.view">
+            <field name="name">crea8s.account.payment.term.form</field>
+            <field name="model">account.payment.term</field>
+            <field name="arch" type="xml">
+                <form string="Payment Term">
+                    <group col="4">
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+	<record id="view_sale_order_form_inherit_discount" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.discount</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+	            <xpath expr="//field[@name='date_order']" position="after">
+	                <field name="valid_date"/>
+	            </xpath>
+	            <xpath expr="//field[@name='payment_term']" position="after">
+	                <field name="delivery_id"/>
+	            </xpath>
+	            <xpath expr="//field[@name='client_order_ref']" position="attributes">
+	                <attribute name="string">Your PO NO.</attribute>
+	            </xpath>
+	            <xpath expr="//field[@name='payment_term']" position="replace">
+	                 <field name="payment_term" context="{'form_view_ref': 'crea8s_view_payment_term_form'}">
+
+	                 </field>
+	            </xpath>
+
+            </field>
+        </record>
+
+		<report auto="False" id="crea8s_so_report" model="sale.order" name="crea8s_so_report"
+                rml="crea8s_report_so/sale_order.rml" string="Quotation / Order"
+                usage="default"/>
+		<report auto="False" id="crea8s_inv_report" model="account.invoice" name="crea8s_inv_report"
+                rml="crea8s_report_so/invoice_report.rml" string="Invoice"
+                usage="default"/>
+		<report auto="False" id="crea8s_po_report" model="purchase.order" name="crea8s_po_report"
+                rml="crea8s_report_so/purchase_report.rml" string="Purchase Order"
+                usage="default"/>
+		<report auto="False" id="crea8s_picking_report" model="stock.picking" name="crea8s_picking_report"
+                rml="crea8s_report_so/picking_report.rml" string="Delivery Order"
+                usage="default"/>
+        
+		
+    </data>
+</openerp>

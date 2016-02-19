@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<openerp>
+
+    <!-- Mail template is done in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="0">
+
+        <!--Email template -->
+        <record id="email_template_attendance_confirmation" model="email.template">
+            <field name="name">Attendance Confirmation</field>
+            <field name="subject">${object.event_id.name}</field>
+            <field name="model_id" ref="event.model_event_registration"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+<strong> Dear  ${object.name},</strong><br/><br/>
+    You have previously stated your intentions to attend the above stated event on <b> ${object.event_id.date_begin} </b><br/><br/>
+
+    you will be prompted to reply with an email containing your updated perticulars by clicking the cofirm button below<br/><br/>
+
+    Kindly spend a few moments to update your perticulars to let us know you better.<br/><br/>
+    % if object.event_id.name_display ==  True:
+        <b>Name:</b> ${object.name}<br/>
+    % endif
+    % if object.event_id.gender_display == True:
+        % if object.male == True:
+            <b>Gender:</b> Male<br/><br/>
+        % endif
+        % if object.female == True:
+            <b>Gender:</b> Female<br/><br/>
+        % endif
+    % endif
+    % if object.event_id.contact_no_display == True:
+        <b>Contact No:</b> ${object.phone}<br/><br/>
+    % endif
+    % if object.event_id.dietry_req_display == True:
+        <b>Dietary Requirements:</b> ${object.dietary_requirement}<br/><br/>
+    % endif
+    % if object.event_id.country_club_display == True:
+        <b>country club:</b> ${object.country_club}<br/><br/>
+    % endif
+    % if object.event_id.country_club_member_display == True:
+        <b>country club membership NO:</b> ${object.country_club_mem}<br/><br/>
+    % endif
+    % if object.event_id.shoe_size_display == True:
+        <b>shoe size:</b> ${object.sho_size.name}<br/><br/>
+    % endif
+    % if object.event_id.us_shirt_size_display == True:
+        <b>US Shirt Size:</b> ${object.us_shirt_size}<br/><br/>
+    % endif
+    % if object.event_id.asian_size_display == True:
+        <b>Asian Size:</b> ${object.asian_size}<br/><br/>
+    % endif
+    <b>Polo Shirt Size:</b> ${object.polo_size.name}<br/><br/>
+    % if object.event_id.flexible_1_display == True:
+        <b> Flexible field 1:</b> ${object.flexible_1}<br/><br/>
+    % endif
+    % if object.event_id.flexible_2_display == True:
+        <b> Flexible field 2:</b> ${object.flexible_2}<br/><br/>
+    % endif
+    % if object.event_id.flexible_3_display == True:
+        <b> Flexible field 3:</b> ${object.flexible_3}<br/><br/>
+    % endif
+    % if object.event_id.flexible_4_isplay == True:
+        <b> Flexible field 4:</b> ${object.flexible_4}<br/><br/>
+    % endif
+    % if object.event_id.flexible_5_display == True:
+        <b> Flexible field 5/b> ${object.flexible_5}<br/><br/>
+    % endif
+
+    Thank you for your updates. <br/><br/>
+    Please proceed to reply to this email.<br/><br/>
+    You will receive a Confirmation Email as your check-in ticket to the above-mentioned event.<br/><br/>
+    Thank you<br/>
+
+            ]]></field>
+        </record>
+    </data>
+</openerp>

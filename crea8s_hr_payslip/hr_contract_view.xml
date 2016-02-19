@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_hr_notice_period_form" model="ir.ui.view">
+            <field name="name">hr.notice.period.form</field>
+            <field name="model">hr.notice.period</field>
+            <field name="arch" type="xml">
+                <form string="Notice Period" version="7.0">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="crea8s_hr_contract_view_form_inherit" model="ir.ui.view">
+            <field name="name">crea8s.hr.contract.view.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='visa_expire']" position="after">
+                	<field name="wkpe_date"/>
+                </xpath>
+                <xpath expr="//label[@for='trial_date_start']" position="replace">
+                	<label for="trial_date_start" string="Probation Period"/>
+            	</xpath>
+            	<xpath expr="//label[@for='date_start']" position="replace">
+            		<label for="date_start" string="Date Of Hire"/>
+            	</xpath>
+            	<xpath expr="//group[@name='salary_and_advantages']" position="replace">
+            		<group name="salary_and_advantages" string="Salary and Benefits">
+                        <field name="wage"/>
+                        <field name="advantages" nolabel="1" placeholder="Advantages..." colspan="2"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='working_hours']" position="after">
+                	<field name="notice_period"/>
+                </xpath>
+            </field>
+        </record>
+
+		<menuitem action="hr_contract.action_hr_contract" id="hr_contract.hr_menu_contract" parent="hr.menu_hr_main" name="Contracts" sequence="0" groups="base.group_hr_manager"/>
+
+		<record id="crea8s_hr_employee_view_form2_inherit" model="ir.ui.view">
+            <field name="name">hr.hr.employee.view.form2</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='vehicle_distance']" position="attributes">
+                	<attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+		
+    </data>
+</openerp>

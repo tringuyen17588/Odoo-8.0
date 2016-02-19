@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+    <record model="ir.ui.view" id="crea8s_crm_case_form_view_job_inherit">
+        <field name="name">Jobs - Recruitment Form Inherit</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//button[@name='action_makeMeeting']" position="replace">
+        		<button name="action_makeMeeting" type="object"
+                        string="Schedule Meeting" help="Schedule interview with this applicant" invisible="1"/>
+        	</xpath>
+        	<xpath expr="//button[@name='%(survey.action_view_survey_question_message)d']" position="replace">
+        		<button name="%(survey.action_view_survey_question_message)d" type="action"
+                        string="Start Interview" help="Answer related job question"
+                        context="{'survey_id': survey, 'response_id': [response], 'response_no':0 ,'active' : response, 'object' : 'hr.applicant'}" invisible="1"/>
+        	</xpath>
+            <xpath expr="//button[@name='action_print_survey']" position="replace">
+        		<button name="action_print_survey" type="object"
+                        string="Print Interview" help="Print interview report" invisible="1"/>
+        	</xpath>
+            <xpath expr="//field[@name='priority']" position="attributes">
+                <attribute name="string">Rating</attribute>
+            </xpath>   
+        </field>
+    </record>
+
+    </data>
+</openerp>

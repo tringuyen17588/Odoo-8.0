@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_cairo_no1,hr.cairo.no1,model_hr_cairo_no1,base.group_hr_user,1,1,1,1

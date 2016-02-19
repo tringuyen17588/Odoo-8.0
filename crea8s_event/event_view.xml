@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="crea8s_event_registration_view_form_inherit" model="ir.ui.view">
+            <field name="name">crea8s.event.registration.form.inherit</field>
+            <field name="model">event.registration</field>
+            <field name="inherit_id" ref="event.view_event_registration_form"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='phone']" position="after">
+                    <separator string="Gender" colspan="2"/>
+                    <field name="male" colspan="1"/>
+                    <field name="female" colspan="1"/>
+                </xpath>
+            
+                <xpath expr="//form/sheet/group/group[2]" position="after">
+                    <group colspan="4" col="4">
+                        <field name="handicap"/>
+                        <field name="refer_no"/>
+                        <field name="flight_no" invisible="1" />
+                        <field name="tee_time"/>
+                        <field name="tee_box"/>
+                        <field name="locker_no"/>
+                        <field name="rm_name"/>
+                        <field name="dietary_requirement"/>
+                        <field name="country_club"/>
+                        <field name="member_no"/>
+                        <field name="country_club_mem"/>
+                        <field name="polo_size"/><newline/>
+                        <field name="shoe_size"/>
+                        <field name="us_shirt_size"/>
+                        <field name="asian_size"/>
+                        <field name="flexible_1"/>
+                        <field name="flexible_2"/>
+                        <field name="flexible_3"/>
+                        <field name="flexible_4"/>
+                        <field name="flexible_5"/>
+                    </group>
+                </xpath>
+            </data>
+            </field>
+        </record>
+
+        <record id="crea8s_mail_mass_mailing_form_inherit" model="ir.ui.view">
+            <field name="name">crea8s.mail.mass_mailing.inherit</field>
+            <field name="model">mail.mass_mailing</field>
+            <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="event_id"/>
+                </xpath>
+            </data>
+            </field>
+        </record>
+
+        <record id="crea8s_mail_mass_mailing_contact_tree_inherit" model="ir.ui.view">
+            <field name="name">crea8s.mail.mass_mailing.contact.tree.inherit</field>
+            <field name="model">mail.mass_mailing.contact</field>
+            <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_tree"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='email']" position="after">
+                    <field name="phone"/>
+                </xpath>
+            </data>
+            </field>
+        </record>
+
+        <record id="crea8s_event_image_form_view" model="ir.ui.view">
+            <field name="name">crea8s.event.image.form</field>
+            <field name="model">crea8s.image.url</field>
+            <field name="arch" type="xml">
+                <form string="Upload Image">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="event_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="set_img_event" type="object" string="Upload" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_crea8s_event_image_form_view" model="ir.actions.act_window">
+            <field name="name">Upload Image</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crea8s.image.url</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="crea8s_view_event_form_tree_inherit" model="ir.ui.view">
+            <field name="name">crea8s.view.event.form.inherit</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//button[@name='%(event.act_event_list_register_event)d']" position="after">
+                    <button string="Mailing List" name="%(mass_mailing.action_view_mass_mailing_lists)d" type="action" class="oe_stat_button oe_inline" 
+                                icon="fa-github" 
+                                help="Register with this event"/>
+                </xpath>
+                <xpath expr="//field[@name='organizer_id']" position="after">
+                    <field name="is_locker"/>
+                    <field name="flexible_1_display"/>
+                    <field name="flexible_2_display"/>
+                    <field name="flexible_3_display"/>
+                    <field name="flexible_4_display"/>
+                    <field name="flexible_5_display"/>
+                </xpath>
+                <xpath expr="//button[@name='button_confirm']" position="before">
+                    <button string="Upload Banner" name="%(action_crea8s_event_image_form_view)d" type="action"/>
+                </xpath>
+                <xpath expr="//label[@for='name']" position="before">
+                    <field name="img_banner" widget="html" colspan="4" readonly="1"/>
+                </xpath>
+                <xpath expr="//page[@string='Event Details']" position="after">
+                    <page string="Informations to Display in Email">
+                        <group col="4">
+                            <field name="name_display"/>
+                            <field name="gender_display"/>
+                            <field name="contact_no_display"/>
+                            <field name="dietry_req_display"/>
+                            <field name="country_club_display"/>
+                            <field name="country_club_member_display"/>
+                            <field name="shoe_size_display"/>
+                            <field name="us_shirt_size_display"/>
+                            <field name="asian_size_display"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </data>
+            </field>
+        </record>
+        
+                <report
+            id="crea8s_event_registration"
+            model="event.registration"
+            name="crea8s.event.registration"
+            rml="crea8s_event/report/label.rml"
+            string="Event Registration"/>
+
+    </data>
+</openerp>

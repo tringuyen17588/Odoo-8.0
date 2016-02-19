@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <report
+            auto="False"
+            id="hr_payroll.payslip_report"
+            model="hr.payslip"
+            name="payslip_report_fanco"
+            rml="crea8s_hr_payslip/report/report_payslip.rml"
+            string="PaySlip" 
+            />
+		<report
+            auto="False"
+            id="payslip_report_crea8s"
+            model="hr.payslip.crea8s"
+            name="payslip_report_fanco_crea8s"
+            rml="crea8s_hr_payslip/report/report_payslip.rml"
+            string="PaySlip" 
+            />
+
+
+    </data>
+</openerp>

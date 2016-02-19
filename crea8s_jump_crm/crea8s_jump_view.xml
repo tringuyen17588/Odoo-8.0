@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+		
+	<record model="ir.ui.view" id="product_template_jump_form_view_inherit">
+	        <field name="name">Product Template Jump</field>
+	        <field name="model">product.template</field>
+	        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+	        <field name="arch" type="xml">
+        		<xpath expr="//field[@name='attribute_line_ids']" position="replace">
+                    <field name="product_variant_ids" colspan="4" nolabel="1" context="{'claim_name': name}">
+                    	<tree string="Product Variants" editable="top">
+		                    <field name="default_code"/>
+		                    <field name="name"/>
+		                    <field name="attribute_value_ids" widget="many2many_tags" readonly="0"/>
+		                    <field name="lst_price"/>
+		                    <field name="price" invisible="not context.get('pricelist',False)"/>
+		                    <field name="uom_id"/>
+		                    <field name="ean13"/>
+		                    <field name="state" invisible="1"/>
+		                    <field name="product_tmpl_id" invisible="1"/>
+		                </tree>
+                    </field>
+                </xpath>
+	        </field>
+        </record>		
+        
+                <record id="crea8s_account_invoice_register_payment_view" model="ir.ui.view">
+            <field name="name">account.invoice.register.payment.form</field>
+            <field name="model">account.invoice.register</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Draft Invoices">
+                    <!-- <p class="oe_grey">
+                        Once draft invoices are confirmed, you will not be able
+                        to modify them. The invoices will receive a unique
+                        number and journal items will be created in your chart
+                        of accounts.
+                    </p> -->
+                    <sheet>
+                    	<group>
+                    	<group>
+                    		<field name="date_order"/>
+                    	</group>
+                    	</group>
+                    </sheet>
+                    <footer>
+                        <button string="Confirm" name="invoice_confirm" type="object" default_focus="1" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_invoice_register_payment"
+            multi="True"
+            key2="client_action_multi" name="Register Payment"
+            res_model="account.invoice.register" src_model="account.invoice"
+            view_mode="form" target="new" view_type="form" context="{'invoice_ids': active_ids}"/>
+        
+		
+     </data>
+</openerp>
